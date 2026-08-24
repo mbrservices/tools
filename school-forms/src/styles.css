@@ -296,6 +296,15 @@ button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
   border-bottom: 1px solid #333;
   padding: 0 4px;
 }
+/* the sig-label's rule already marks the writing area, so a missing place
+   only reserves space here - its own underline would double the line. It
+   grows into whatever the date leaves over, so the writing space adapts to
+   the cell width instead of pushing the date onto a second line */
+.sheet .sig-lined .fillline {
+  border-bottom: none;
+  flex: 1 1 auto;
+  min-width: 40px;
+}
 .sheet .sig-row {
   display: flex;
   justify-content: space-between;
@@ -312,7 +321,17 @@ button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 }
 /* variant with the (pre-filled) value ABOVE the line, label below */
 .sheet .sig-row > div.sig-lined { border-top: none; padding-top: 0; }
-.sheet .sig-lined .sig-value { padding: 0 4px 2px; min-height: 1.2em; color: #1a1d1f; }
+/* flex + nowrap: "Ort, Datum" is one value - the date stays on the fill-in's
+   line instead of breaking onto a second one (the date is an anonymous flex
+   item next to the .fillline span) */
+.sheet .sig-lined .sig-value {
+  display: flex;
+  align-items: baseline;
+  padding: 0 4px 2px;
+  min-height: 1.2em;
+  color: #1a1d1f;
+  white-space: nowrap;
+}
 .sheet .sig-lined .sig-label { border-top: 1px solid #333; padding-top: 4px; }
 .sheet .empty-note {
   color: #999; font-family: system-ui, sans-serif; font-size: 10pt;
