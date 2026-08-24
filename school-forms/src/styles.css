@@ -208,9 +208,9 @@ button.add {
 }
 button.add:hover { border-color: var(--muted); color: var(--text); }
 
-.actions { margin-top: 20px; display: flex; gap: 10px; }
+.actions { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 10px; }
 button.primary {
-  flex: 1;
+  flex: 1 1 120px;
   background: var(--ink);
   color: #fff;
   border: none;
@@ -231,6 +231,7 @@ button.ghost {
   cursor: pointer;
 }
 button.ghost:hover { border-color: var(--muted); color: var(--text); }
+button:disabled { opacity: 0.6; cursor: default; }
 button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 .hint { font-size: 0.78rem; color: var(--muted); margin-top: 10px; line-height: 1.4; }
 .panel-info { font-size: 0.85rem; font-weight: 600; color: var(--ink); margin: 14px 0 0; }

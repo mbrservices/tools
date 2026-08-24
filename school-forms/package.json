@@ -4,11 +4,13 @@
   "description": "Fill in German school forms and print/save them as PDF",
   "scripts": {
     "postinstall": "npm run vendor",
-    "vendor": "node -e \"const fs=require('fs');fs.mkdirSync('src/vendor',{recursive:true});fs.copyFileSync(require.resolve('mustache/mustache.min.js'),'src/vendor/mustache.min.js')\"",
+    "vendor": "node vendor.js",
     "test": "node tests/smoke-test.js && node tests/dom-test.js",
     "update-holidays": "node update-holidays.js"
   },
   "dependencies": {
+    "html2canvas": "1.4.1",
+    "jspdf": "4.2.1",
     "mustache": "4.2.0"
   },
   "devDependencies": {

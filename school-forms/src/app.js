@@ -530,6 +530,94 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
   window.addEventListener("resize", fitSheet);
 
+  /* ---------- PDF export ----------
+   * Mobile Safari stamps its own header and footer (title, date, URL, page
+   * number) onto every page it prints and offers no switch for it - no CSS
+   * reaches that part of the print job. A PDF file printed from the Files
+   * app comes out clean, so the app renders one itself: html2canvas
+   * photographs the very sheet that is on screen (preview and PDF therefore
+   * cannot drift apart), jsPDF places each page on A4. */
+  const VENDOR_LIBS = ["vendor/html2canvas.min.js", "vendor/jspdf.umd.min.js"];
+  let libsLoaded; // ~600 KB - fetched on first export, not on page load
+
+  function loadPdfLibs() {
+    libsLoaded ??= Promise.all(VENDOR_LIBS.map(src => new Promise((resolve, reject) => {
+      const el = document.createElement("script");
+      el.src = src;
+      el.onload = resolve;
+      el.onerror = () => reject(new Error(src));
+      document.head.appendChild(el);
+    })));
+    return libsLoaded;
+  }
+
+  // An off-screen copy of the sheet at full A4 size: the preview may be
+  // zoomed down (fitSheet) and shows the screen variant of the values -
+  // the PDF must carry the print variant, like @media print does.
+  function printableClone() {
+    const holder = document.createElement("div");
+    holder.style.cssText = "position:fixed;top:0;left:-10000px;width:210mm;background:#fff;";
+    const clone = sheet.cloneNode(true);
+    clone.style.zoom = "1";
+    clone.style.boxShadow = "none";
+    clone.style.background = "#fff"; // the preview's off-white paper would
+                                     // show up as a tinted block on the page
+    clone.querySelectorAll(".ghost, .page-break").forEach(el => el.remove());
+    clone.querySelectorAll(".print-only").forEach(el => { el.style.display = "inline"; });
+    holder.appendChild(clone);
+    document.body.appendChild(holder);
+    return { holder, clone };
+  }
+
+  async function savePdf() {
+    await loadPdfLibs();
+    const { jsPDF } = window.jspdf;
+    const { holder, clone } = printableClone();
+    try {
+      // multi-page forms mark their pages; the .page boxes hold the content
+      // only (the 15mm margin sits on the sheet), single-page forms are
+      // captured with the sheet padding and placed edge to edge
+      const pages = [...clone.querySelectorAll(".page")];
+      const blocks = pages.length ? pages : [clone];
+      const margin = pages.length ? 15 : 0;
+      const doc = new jsPDF({ unit: "mm", format: "a4", orientation: "portrait" });
+      const [pw, ph] = [doc.internal.pageSize.getWidth(), doc.internal.pageSize.getHeight()];
+      for (const [i, block] of blocks.entries()) {
+        const canvas = await window.html2canvas(block, {
+          scale: 3, // ~288 dpi on A4
+          backgroundColor: "#ffffff",
+          logging: false,
+        });
+        if (i) doc.addPage();
+        // the width fits by construction; a form that outgrew its page is
+        // scaled down (and centred) rather than cut off
+        const ratio = canvas.height / canvas.width;
+        let w = pw - 2 * margin;
+        let h = w * ratio;
+        if (h > ph - 2 * margin) { h = ph - 2 * margin; w = h / ratio; }
+        doc.addImage(canvas.toDataURL("image/jpeg", 0.95), "JPEG",
+          (pw - w) / 2, margin, w, h);
+      }
+      // document.title is "<template> - <child>"
+      const name = document.title.replace(/[\\/:*?"<>|]/g, "") + ".pdf";
+      const file = new File([doc.output("blob")], name, { type: "application/pdf" });
+      // The OS share sheet is the short way on a phone: it offers "Drucken"
+      // right there. Where it is unavailable - or the tap that started this
+      // no longer counts as a user gesture - the file is downloaded instead.
+      if (navigator.canShare?.({ files: [file] })) {
+        try {
+          await navigator.share({ files: [file], title: document.title });
+          return;
+        } catch (err) {
+          if (err.name === "AbortError") return; // user closed the sheet
+        }
+      }
+      doc.save(name);
+    } finally {
+      holder.remove();
+    }
+  }
+
   // "Leeren" clears only the current child's form inputs, not master data
   function resetForm() {
     store.byChild[store.child] = state = {};
@@ -548,6 +636,21 @@ document.addEventListener("DOMContentLoaded", async () => {
   childSelect.addEventListener("change", () => activateChild(childSelect.value));
   document.getElementById("printBtn").addEventListener("click", () => window.print());
   document.getElementById("resetBtn").addEventListener("click", resetForm);
+  const pdfBtn = document.getElementById("pdfBtn");
+  pdfBtn.addEventListener("click", async () => {
+    // rendering an A4 page at 288 dpi takes a moment on a phone
+    const label = pdfBtn.textContent;
+    pdfBtn.disabled = true;
+    pdfBtn.textContent = "PDF …";
+    try {
+      await savePdf();
+    } catch (err) {
+      window.alert("Das PDF konnte nicht erstellt werden: " + err.message);
+    } finally {
+      pdfBtn.disabled = false;
+      pdfBtn.textContent = label;
+    }
+  });
   // footer: wipe EVERYTHING (master data included) and start over
   document.getElementById("wipeBtn").addEventListener("click", () => {
     if (!window.confirm("Wirklich alle gespeicherten Daten löschen?\nStammdaten und sämtliche Formulareingaben gehen verloren.")) return;

@@ -22,6 +22,7 @@ build.js                    Assembles dist/ incl. generated manifest.json files
 manifest.js                 Shared directory-listing logic for server.js and build.js
 school-forms/               npm workspace, one per tool
   package.json              Tool-specific dependencies, tests and vendor script
+  vendor.js                 Copies the browser libraries into src/vendor/ (npm run vendor)
   update-holidays.js        Fetches Thuringian school holidays into src/data/
   src/                      Everything in here is deployed as-is to /school-forms/
     index.html              App shell
@@ -33,7 +34,8 @@ school-forms/               npm workspace, one per tool
     templates/partials/     Shared mustache partials (school header, signature row)
     data/                   holidays.json (auto-updated weekly), coverage.json and
                             schools.json (school directory for the autocomplete; manual)
-    vendor/                 mustache.min.js - copied at install time, not committed
+    vendor/                 mustache, jsPDF, html2canvas - copied at install time,
+                            not committed (the PDF pair is loaded on first export only)
   examples/                 Private scans of the original forms - gitignored, never deployed
   tests/smoke-test.js       Renders every template with the fixture data
   tests/dom-test.js         Boots the app in happy-dom and exercises master data,
@@ -50,9 +52,17 @@ fly (no rebuild while developing), the build writes it as a real file. The app
 uses it e.g. to discover the mustache partials in `templates/partials/`.
 
 Third-party code is not committed. [mustache.js](https://github.com/janl/mustache.js)
-is pinned in the workspace's `package.json`, integrity-checked via the root
+(templates), [jsPDF](https://github.com/parallax/jsPDF) and
+[html2canvas](https://github.com/niklasvh/html2canvas) (the "Als PDF" export)
+are pinned in the workspace's `package.json`, integrity-checked via the root
 `package-lock.json` and copied into `school-forms/src/vendor/` by the `vendor`
 npm script (runs automatically on `npm install`).
+
+The PDF export exists because mobile Safari prints its own header and footer
+(title, date, URL, page number) onto every page and offers no way to turn that
+off - no CSS reaches that part of the print job. A PDF file printed from the
+Files app comes out clean, so the app renders one from the very sheet the
+preview shows; that keeps preview and PDF from drifting apart.
 
 ## Local development
 
@@ -60,7 +70,7 @@ Node is managed with [mise](https://mise.jdx.dev) (see `mise.toml`):
 
 ```sh
 mise install
-npm install        # installs all workspaces, copies mustache into school-forms/vendor/
+npm install        # installs all workspaces, copies the libraries into school-forms/src/vendor/
 npm test           # template render test + DOM boot test (both also run in CI)
 npm run dev        # serves the site at http://localhost:8080/school-forms/
 ```
@@ -75,7 +85,7 @@ npm run build
 ```
 
 `build.js` assembles the deployable site into `dist/`: the landing page, each
-workspace's `src/` copied verbatim (incl. the vendored library) and a
+workspace's `src/` copied verbatim (incl. the vendored libraries) and a
 `manifest.json` per directory.
 
 ## Deployment (GitHub Pages)
