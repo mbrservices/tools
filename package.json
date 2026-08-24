@@ -1,0 +1,13 @@
+{
+  "name": "mbr-tools",
+  "private": true,
+  "description": "Static web tools published at tools.mbr.services",
+  "workspaces": [
+    "school-forms"
+  ],
+  "scripts": {
+    "dev": "node server.js",
+    "test": "npm test --workspaces --if-present",
+    "build": "node build.js"
+  }
+}

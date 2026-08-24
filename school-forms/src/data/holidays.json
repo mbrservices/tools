@@ -1,0 +1,61 @@
+{
+  "fetchedAt": "2026-08-21T20:38:26.884Z",
+  "source": "openholidaysapi.org",
+  "subdivision": "DE-TH",
+  "holidays": [
+    {
+      "id": "5fec2836-3d12-4a43-987e-1ed22ce986a5",
+      "name": "Sommerferien",
+      "startDate": "2026-07-04",
+      "endDate": "2026-08-14"
+    },
+    {
+      "id": "dd933683-1b2b-49e6-9933-4b565cef0d37",
+      "name": "Herbstferien",
+      "startDate": "2026-10-12",
+      "endDate": "2026-10-24"
+    },
+    {
+      "id": "d143fd7f-0086-4866-b22e-870e069cf39a",
+      "name": "Weihnachtsferien",
+      "startDate": "2026-12-23",
+      "endDate": "2027-01-02"
+    },
+    {
+      "id": "8e8f44e0-c470-4226-84f4-70037ae8afd2",
+      "name": "Winterferien",
+      "startDate": "2027-02-01",
+      "endDate": "2027-02-06"
+    },
+    {
+      "id": "fcdcb494-ba46-4103-a151-577c7efa2913",
+      "name": "Osterferien",
+      "startDate": "2027-03-22",
+      "endDate": "2027-04-03"
+    },
+    {
+      "id": "1cd32e62-e14b-45ca-b80a-aa344483b7f6",
+      "name": "Schulfreier Tag",
+      "startDate": "2027-05-07",
+      "endDate": "2027-05-07"
+    },
+    {
+      "id": "a4c356dd-ebbe-48c2-be43-99c574a0661a",
+      "name": "Sommerferien",
+      "startDate": "2027-07-10",
+      "endDate": "2027-08-20"
+    },
+    {
+      "id": "9796a9fe-d8b1-4501-ac41-3a88655f61be",
+      "name": "Herbstferien",
+      "startDate": "2027-10-09",
+      "endDate": "2027-10-23"
+    },
+    {
+      "id": "50fb61a8-4b54-4207-be23-7ba6c486ea61",
+      "name": "Weihnachtsferien",
+      "startDate": "2027-12-23",
+      "endDate": "2027-12-31"
+    }
+  ]
+}

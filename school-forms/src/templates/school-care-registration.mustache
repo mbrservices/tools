@@ -1,0 +1,127 @@
+<div class="compact">
+<p class="form-title">Anmeldung zur Aufnahme in einen Schulhort<br>des Landkreises Sonneberg für das Schuljahr {{hortYearText}}</p>
+<p><b>Name der Schule / des Hortes:</b>&nbsp; {{{schoolName}}}</p>
+<table class="doc">
+  <tr>
+    <td style="width:42%"><b>Name, Vorname des Kindes:</b><br>{{{childFormal}}}</td>
+    <td colspan="2"><b>Geburtsdatum:</b><br>{{{birth}}}</td>
+  </tr>
+  <tr>
+    <td><b>Anschrift des Kindes:</b><br>{{{childAddress}}}</td>
+    <td style="width:22%"><b>Klasse:</b><br>{{{grade}}}</td>
+    <td><b>Schulanfänger:</b><br>Bitte ankreuzen:<br>
+      {{#starterYes}}☒{{/starterYes}}{{^starterYes}}☐{{/starterYes}} Ja &nbsp;
+      {{#starterNo}}☒{{/starterNo}}{{^starterNo}}☐{{/starterNo}} Nein</td>
+  </tr>
+  <tr>
+    <td><b>Namen, Vornamen der Eltern:</b></td>
+    <td colspan="2"><b>Sorgeberechtigung:</b></td>
+  </tr>
+  {{#parentRows}}
+  <tr>
+    <td><b>{{role}}:</b> {{{name}}}</td>
+    <td colspan="2">Bitte ankreuzen:&nbsp;
+      {{#yes}}☒{{/yes}}{{^yes}}☐{{/yes}} Ja &nbsp;
+      {{#no}}☒{{/no}}{{^no}}☐{{/no}} Nein</td>
+  </tr>
+  {{/parentRows}}
+  <tr>
+    <td colspan="3"><b>Anschrift(-en) der Eltern:</b><br>
+      {{#parentRows}}<b>{{role}}:</b> {{{address}}}<br>{{/parentRows}}</td>
+  </tr>
+  <tr>
+    <td colspan="3"><b>Erreichbarkeit der Sorgeberechtigten während des Hortaufenthaltes des Kindes:</b></td>
+  </tr>
+  <tr>
+    <td><b>Telefon-Nr.:</b><br>{{{allPhones}}}</td>
+    <td colspan="2"><b>Anschrift (falls abweichend von der Wohnanschrift):</b>
+      {{#deviatingSlots}}<div class="fill-row">{{v}}&nbsp;</div>{{/deviatingSlots}}</td>
+  </tr>
+  <tr>
+    <td colspan="3"><b>Wir/Ich beantrage(-n) für unser/mein Kind die Betreuung im Grundschulhort:</b></td>
+  </tr>
+  <tr>
+    <td><b>ab Tag:</b> {{{careStartText}}}</td>
+    <td colspan="2">
+      <div style="display:flex;gap:8px;">
+        <span>Bitte ankreuzen:</span>
+        <span>
+          {{#hoursOver}}☒{{/hoursOver}}{{^hoursOver}}☐{{/hoursOver}} über 10 Stunden/Woche<br>
+          {{#hoursUnder}}☒{{/hoursUnder}}{{^hoursUnder}}☐{{/hoursUnder}} bis 10 Stunden/Woche
+        </span>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td><b>Mein/unser Kind wird aus<br>dem Schulhort abgeholt:</b><br>
+      Bitte ankreuzen:<br>
+      {{#pickupYes}}☒{{/pickupYes}}{{^pickupYes}}☐{{/pickupYes}} ja &nbsp;
+      {{#pickupNo}}☒{{/pickupNo}}{{^pickupNo}}☐{{/pickupNo}} nein</td>
+    <td colspan="2"><b>Falls ja, abholberechtigt sind (Namen, Vornamen):</b>
+      {{#pickupSlots}}<div class="fill-row">{{v}}&nbsp;</div>{{/pickupSlots}}</td>
+  </tr>
+  <tr>
+    <td colspan="3"><b>Sollte das Kind nicht rechtzeitig abgeholt werden, wenden Sie sich an folgende Person:</b></td>
+  </tr>
+  <tr>
+    <td colspan="3" style="padding:0;">
+      <!-- nested table: narrower name column, wider address column -->
+      <table style="width:100%;border-collapse:collapse;">
+        <tr>
+          <td style="width:28%;border:none;border-right:1px solid #333;padding:3px 6px;"><b>Name, Vorname:</b><br>{{{altContactName}}}</td>
+          <td style="width:22%;border:none;border-right:1px solid #333;padding:3px 6px;"><b>Telefon-Nr.:</b><br>{{{altContactMobile}}}</td>
+          <td style="border:none;padding:3px 6px;"><b>Wohnanschrift:</b><br>{{{altContactAddress}}}</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3" style="background:#e9e9e5;">
+      <b>Ein Antrag auf Ermäßigung (Einkommen, Geschwisterkinder etc.) der bzw. Befreiung von den
+      Hortgebühren wird gestellt:</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3" style="background:#e9e9e5;padding:0;">
+      <!-- nested table: the tick column can be narrower than the outer grid -->
+      <table style="width:100%;border-collapse:collapse;">
+        <tr>
+          <td style="width:20%;border:none;padding:3px 6px;vertical-align:top;">Bitte ankreuzen:<br>
+            {{#reductionYes}}☒{{/reductionYes}}{{^reductionYes}}☐{{/reductionYes}} ja &nbsp;
+            {{#reductionNo}}☒{{/reductionNo}}{{^reductionNo}}☐{{/reductionNo}} nein
+            {{^reductionYes}}{{^reductionNo}}<br><span class="ghost">(Pflichtangabe - ohne Kreuz wird das Formular nicht akzeptiert)</span>{{/reductionNo}}{{/reductionYes}}</td>
+          <td style="border:none;border-left:1px solid #333;padding:3px 6px;">
+            Alle Informationen zur Hortanmeldung und den Antrag auf Ermäßigung finden Sie unter
+            www.kreis-sonneberg.de (Bürgerservice → Bildung, Schule und Hort → Hortanmeldung → Anträge/Formulare).</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3" style="background:#e9e9e5;">
+      <b>WICHTIG: Der Ermäßigungsantrag ist schuljährlich neu und direkt im Schulverwaltungsamt einzureichen!</b>
+    </td>
+  </tr>
+</table>
+<p><b>Dieser Antrag auf Aufnahme in den Schulhort ist bis zum</b> {{{submitByText}}} <b>bei der Schule einzureichen.</b></p>
+<div class="sig-row" style="margin-top:30px;">
+  <div class="sig-lined" style="flex:0 0 28%;">
+    <div class="sig-value">{{{sigPlaceDate}}}&nbsp;</div>
+    <div class="sig-label">Ort, Datum</div>
+  </div>
+  <div class="sig-lined" style="flex:0 0 62%;">
+    <div class="sig-value">&nbsp;</div>
+    <div class="sig-label">Unterschrift(-en) der sorgeberechtigten Person(-en)</div>
+  </div>
+</div>
+<div class="sig-row" style="margin-top:44px;">
+  <div class="sig-lined">
+    <div class="sig-value">&nbsp;</div>
+    <div class="sig-label">Eingangsvermerk Schule / Hort</div>
+  </div>
+  <div class="sig-lined">
+    <div class="sig-value">&nbsp;</div>
+    <div class="sig-label">Stempel und Unterschrift Schulleitung</div>
+  </div>
+</div>
+</div>

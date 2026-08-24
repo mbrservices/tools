@@ -1,0 +1,23 @@
+{
+  "_comment": "Which school covers holiday care in which period - maintained by hand from the school's 'Ferienregelungen' sheet. Periods must not overlap; days without an entry stay blank on the form.",
+  "coverage": [
+    { "from": "2026-07-06", "to": "2026-07-24", "school": "GS Scholl" },
+    { "from": "2026-07-27", "to": "2026-08-14", "school": "GS Wolkenrasen" },
+
+    { "from": "2026-10-12", "to": "2026-10-16", "school": "GS Scholl" },
+    { "from": "2026-10-19", "to": "2026-10-23", "school": "GS Wolkenrasen" },
+
+    { "from": "2026-12-23", "to": "2026-12-23", "school": "GS Wolkenrasen" },
+    { "from": "2026-12-28", "to": "2026-12-30", "school": "Stützpunktschule (wird festgelegt)" },
+
+    { "from": "2027-02-01", "to": "2027-02-06", "school": "GS Wolkenrasen" },
+
+    { "from": "2027-03-22", "to": "2027-03-26", "school": "GS Wolkenrasen" },
+    { "from": "2027-03-30", "to": "2027-04-02", "school": "GS Scholl" },
+
+    { "from": "2027-05-07", "to": "2027-05-07", "school": "Stützpunktschule (wird festgelegt)" },
+
+    { "from": "2027-07-12", "to": "2027-07-30", "school": "GS Wolkenrasen" },
+    { "from": "2027-08-02", "to": "2027-08-20", "school": "GS Scholl" }
+  ]
+}

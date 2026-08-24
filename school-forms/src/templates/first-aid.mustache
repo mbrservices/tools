@@ -1,0 +1,68 @@
+<div class="page">
+<p class="form-title">Erste-Hilfe-Maßnahmen (Erreichbarkeit)</p>
+<p>Sehr geehrte Eltern,</p>
+<p style="font-size:10.5pt;">es kann vorkommen, dass Ihr Kind wegen Krankheit, einem Unfall in der Schule oder wegen einer
+anderen Situation ärztlicher Behandlung bedarf bzw. eine Verständigung der Erziehungsberechtigten
+notwendig ist. Die Schule will Sie in einem solchen Fall möglichst sofort benachrichtigen, damit Sie
+sich um Ihr Kind kümmern können. Es ist dabei oft nicht einfach, eine rasche Verständigung zu
+erreichen, besonders wenn die Eltern berufstätig sind.<br>
+Damit wir wissen, wie wir Sie oder bei Verhinderung eine Vertrauensperson (Verwandtschaft,
+Nachbarn) erreichen können, bitten wir Sie, den unteren Abschnitt auszufüllen und durch Ihr Kind an
+die Schule zurückzugeben.</p>
+<p>Mit freundlichen Grüßen<br>Ihre Schulleitung</p>
+<div class="addr-block" style="margin-left:0;">{{> school-addr}}</div>
+<table class="doc">
+  <tr>
+    <td style="width:44%"><b>Name, Vorname Schüler/in:</b><br>{{{childFormal}}}</td>
+    <td style="width:28%"><b>geboren am:</b><br>{{{birth}}}</td>
+    <td><b>Klasse:</b><br>{{{grade}}}</td>
+  </tr>
+  <tr>
+    <td><b>Krankenkasse:</b><br>{{{insurer}}}</td>
+    <td colspan="2"><b>mitversichert bei:</b>&nbsp;&nbsp;<span style="display:inline-block;vertical-align:top;">
+      {{#parentBlocks}}<span style="display:block;">{{#insured}}☒{{/insured}}{{^insured}}☐{{/insured}} {{tickTag}}</span>{{/parentBlocks}}</span></td>
+  </tr>
+  {{#parentBlocks}}
+  <tr><td><b><u>{{role}}</u></b></td><td colspan="2"><b>Name, Vorname:</b> {{{name}}}</td></tr>
+  <tr><td colspan="3"><b>Anschrift:</b> {{{address}}}</td></tr>
+  <tr><td colspan="3"><b>Handynummer:</b> {{{mobile}}}</td></tr>
+  <tr><td colspan="3"><b>Festnetz - privat:</b> {{{landline}}}</td></tr>
+  <tr><td colspan="3"><b>dienstliche Erreichbarkeit:</b> {{{work}}}</td></tr>
+  <tr><td colspan="3"><b>E-Mail-Adresse:</b> {{{email}}}</td></tr>
+  {{/parentBlocks}}
+</table>
+<p style="font-family:system-ui,sans-serif;font-size:10pt;"><b><u>Bitte Rückseite auch ausfüllen!</u></b></p>
+
+</div>
+<div class="page-break"></div>
+<div class="page">
+
+<div class="box">
+  <p><b>Falls beide Eltern während der Unterrichtszeit berufstätig sind, an wen soll sich die Schule wenden?</b></p>
+  <p>
+    {{#parentBlocks}}{{#workPicked}}☒{{/workPicked}}{{^workPicked}}☐{{/workPicked}} {{tickTag}}&nbsp;&nbsp;&nbsp;{{/parentBlocks}}
+  </p>
+  <p><b>Wenn die Eltern einmal nicht zu erreichen sein sollten, wen soll die Schule verständigen?</b></p>
+  <table class="doc">
+    <tr><td><b>Ansprechpartner:</b> {{{alt.name}}}</td></tr>
+    <tr><td><b>Anschrift:</b> {{{alt.address}}}</td></tr>
+    <tr><td><b>Handynummer:</b> {{{alt.mobile}}}</td></tr>
+    <tr><td><b>Festnetz - privat:</b> {{{alt.landline}}}</td></tr>
+    <tr><td><b>dienstliche Erreichbarkeit:</b> {{{alt.work}}}</td></tr>
+  </table>
+</div>
+<div class="box">
+  <b>Für notwendige ärztliche Behandlung, Anschrift des Hausarztes und dessen Telefonnummer:</b>
+  <p style="min-height:80px;">{{{doctor}}}</p>
+</div>
+{{> sig-block}}
+<div class="note-box">
+  Bitte denken Sie daran, dass Sie verpflichtet sind, der Schule <u>umgehend</u> Adressänderungen
+  sowie Änderungen der Telefonnummern mitzuteilen!<br><br>
+  Da bei notwendigen Notarzteinsätzen auch die Krankenkasse und bei wem das Kind versichert ist
+  abgefragt wird, benötigen wir auch immer die aktuelle Krankenkasse.
+</div>
+{{#returnByText}}
+<p style="font-family:system-ui,sans-serif;"><b><u>Rückgabetermin: {{returnByText}}</u></b></p>
+{{/returnByText}}
+</div>

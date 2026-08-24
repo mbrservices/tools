@@ -1,0 +1,81 @@
+<div class="compact">
+<p class="form-title" style="font-size:9pt;">Erfassung / Bestätigung der Betreuungszeiten im Grundschulhort / Schulamtsbereich Südthüringen</p>
+<p style="display:flex;justify-content:space-between;align-items:baseline;font-family:system-ui,sans-serif;font-size:10pt;">
+  <span>Schuljahr</span>
+  <b style="font-size:14pt;">{{schoolYear}}</b>
+</p>
+<table class="doc">
+  <tr>
+    <td style="width:17%"><b>Grundschule</b></td><td>{{{schoolName}}}</td>
+    <td style="width:17%"><b>Schulnummer</b></td><td style="width:14%">{{{schoolNumber}}}</td>
+  </tr>
+  <tr>
+    <td><b>Schüler</b></td><td>{{{childFormal}}}</td>
+    <td>{{{birth}}}</td><td>{{{grade}}}</td>
+  </tr>
+  <tr>
+    <td colspan="2" style="border:none"></td>
+    <td><b>Geb.-Datum</b></td><td><b>Klasse</b></td>
+  </tr>
+</table>
+<table class="doc">
+  <tr><td style="width:38%"><b>Hortbesuch</b></td><td style="width:7%">ab</td><td>{{careStart}}</td></tr>
+  <tr><td><b>Änderung der Betreuungszeit</b></td><td>ab</td><td>{{careChange}}</td></tr>
+</table>
+<p style="font-family:system-ui,sans-serif;font-size:10pt;"><b>Betreuungszeit entsprechend Stundenplan</b></p>
+<div class="box">
+  <p class="box-title">NUR durch ELTERN auszufüllen</p>
+  <table class="doc" style="table-layout:fixed;">
+    <colgroup><col style="width:22%"><col style="width:10%"></colgroup>
+    <tr><th colspan="2" style="border:none;background:none"></th>{{#days}}<th>{{label}}</th>{{/days}}</tr>
+    <tr><td rowspan="2"><b>VOR</b> Unterrichtsbeginn</td><td>von</td>{{#days}}<td>{{beforeFrom}}</td>{{/days}}</tr>
+    <tr><td>bis</td>{{#days}}<td>{{beforeTo}}</td>{{/days}}</tr>
+    <tr><td rowspan="2"><b>NACH</b> Unterrichtsende</td><td>von</td>{{#days}}<td>{{afterFrom}}</td>{{/days}}</tr>
+    <tr><td>bis</td>{{#days}}<td>{{afterTo}}</td>{{/days}}</tr>
+  </table>
+  <p style="margin:8px 0 4px;">
+    {{#pickAlone}}☒{{/pickAlone}}{{^pickAlone}}☐{{/pickAlone}} Mein/unser Kind darf allein nach Hause laufen.*<br>
+    {{#pickBus}}☒{{/pickBus}}{{^pickBus}}☐{{/pickBus}} Mein/unser Kind fährt mit dem Schulbus.*<br>
+    {{#pickUp}}☒{{/pickUp}}{{^pickUp}}☐{{/pickUp}} Mein/unser Kind wird abgeholt.*
+  </p>
+  <div class="sig-single"><div>Unterschrift Sorgeberechtigte</div></div>
+  <p style="font-size:9pt;margin:10px 0 2px;">*Zutreffendes bitte ankreuzen!</p>
+</div>
+<div class="box">
+  <p class="box-title">NUR durch HORT auszufüllen</p>
+  {{#hasSums}}
+  <p class="ghost" style="margin:-4px 0 8px;font-size:9pt;">(berechnete Vorschau, wird nicht gedruckt)</p>
+  {{/hasSums}}
+  <!-- identical colgroup as the parents' table so the day columns align -->
+  <table class="doc" style="table-layout:fixed;">
+    <colgroup><col style="width:22%"><col style="width:10%"></colgroup>
+    <tr><th colspan="2" style="border:none;background:none"></th>{{#days}}<th>{{label}}</th>{{/days}}</tr>
+    <tr><td style="border:none"><b>Gesamtstunden</b></td><td style="border:none">täglich</td>{{#days}}<td><span class="ghost">{{sumText}}</span>&nbsp;</td>{{/days}}</tr>
+    <tr><td colspan="7" style="border:none;height:8px;"></td></tr>
+    <tr><td style="border:none"><b>Summe</b></td><td style="border:none">Woche</td><td><span class="ghost">{{weeklyText}}</span>&nbsp;</td><td colspan="4" style="border:none"></td></tr>
+    <tr><td colspan="7" style="border:none;height:8px;"></td></tr>
+    <tr>
+      <td style="border:none"><b>bis 10 h</b></td>
+      <td style="border:none">{{#under10}}<span class="ghost">☒</span><span class="print-only">☐</span>{{/under10}}{{^under10}}☐{{/under10}}</td>
+      <td colspan="5" style="border:none"></td>
+    </tr>
+    <tr>
+      <td style="border:none"><b>über 10 h</b></td>
+      <td style="border:none">{{#over10}}<span class="ghost">☒</span><span class="print-only">☐</span>{{/over10}}{{^over10}}☐{{/over10}}</td>
+      <td colspan="5" style="border:none"></td>
+    </tr>
+  </table>
+  <div class="sig-single"><div>Unterschrift Hortkoordinator</div></div>
+</div>
+<div class="box" style="font-size:9.5pt;">
+  Ab-/Ummeldungen auf Grund Stundenplan müssen während des laufenden Schuljahres bis zum <b>05. des Monats</b>
+  bei der jeweiligen Grundschule erfolgen und werden unter Beachtung der Nutzungs- und Gebührensatzung
+  des Schulträgers zum Monatsende wirksam.<br>
+  Bei nicht fristgerechter Abmeldung ist die Gebühr für einen weiteren Monat zu zahlen.
+</div>
+<!-- generous gap: the printed sheet needs room for stamp and signature -->
+<div class="sig-row" style="margin-top:70px;">
+  <div style="flex:0 0 24%;">Eingangsdatum</div>
+  <div style="flex:0 0 48%;">Unterschrift / Stempel Schulleitung</div>
+</div>
+</div>

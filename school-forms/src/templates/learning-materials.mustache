@@ -1,0 +1,35 @@
+<div class="page">
+<div class="addr-block">{{> school-addr}}</div>
+<p class="form-title" style="margin-bottom:2px;">Lernmittel-Leihschein</p>
+<p style="font-family:system-ui,sans-serif;font-size:10pt;margin-top:0;">(Rückgabe des Originalscheines an die Schule)</p>
+<p style="font-family:system-ui,sans-serif;font-weight:600;">Ich bestätige, dass der Schülerin / dem Schüler *</p>
+<p class="kv"><b>Name, Vorname:</b> {{{childFormal}}}</p>
+<p class="kv" style="display:flex;justify-content:space-between;"><span><b>Geburtsdatum:</b> {{{birth}}}</span><span><b style="min-width:0;">Klasse:</b> {{{grade}}}</span></p>
+<p class="kv"><b>Anschrift:</b> {{{childAddress}}}</p>
+<p style="font-family:system-ui,sans-serif;">für das Schuljahr <b>{{schoolYear}}</b> nachstehende Lernmittel (Schulbücher bzw. lehrwerksbegleitende Materialien) leihweise übergeben wurden:</p>
+<table class="doc">
+  <tr>
+    <th style="width:14%">Buch-Nr. usw.</th>
+    <th>Titel</th>
+    <th style="width:10%">Anzahl</th>
+    <th style="width:26%">Unterschrift Erziehungsberechtigter</th>
+  </tr>
+  {{#rows}}
+  <tr><td>{{no}}&nbsp;</td><td>{{title}}</td><td>{{count}}</td><td></td></tr>
+  {{/rows}}
+</table>
+<p style="font-size:9pt;font-family:system-ui,sans-serif;text-align:right;">*Nichtzutreffendes streichen!</p>
+
+</div>
+<div class="page-break"></div>
+<div class="page">
+
+<div class="addr-block">{{> school-addr}}</div>
+<p style="font-family:system-ui,sans-serif;">Mir ist bekannt, dass</p>
+<ul style="font-family:system-ui,sans-serif;font-size:10.5pt;">
+  <li>in diesen Büchern bzw. lehrwerksbegleitenden Materialien keine Eintragungen, Unterstreichungen oder Markierungen vorgenommen werden dürfen,</li>
+  <li>die Bücher durch einen Umschlag vor einer unnötigen Verschmutzung zu schützen sind,</li>
+  <li>bei Verlust oder Beschädigung eine Wiederbeschaffung zu erfolgen hat.</li>
+</ul>
+{{> sig-block}}
+</div>

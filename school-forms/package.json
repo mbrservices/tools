@@ -1,0 +1,17 @@
+{
+  "name": "school-forms",
+  "private": true,
+  "description": "Fill in German school forms and print/save them as PDF",
+  "scripts": {
+    "postinstall": "npm run vendor",
+    "vendor": "node -e \"const fs=require('fs');fs.mkdirSync('src/vendor',{recursive:true});fs.copyFileSync(require.resolve('mustache/mustache.min.js'),'src/vendor/mustache.min.js')\"",
+    "test": "node tests/smoke-test.js && node tests/dom-test.js",
+    "update-holidays": "node update-holidays.js"
+  },
+  "dependencies": {
+    "mustache": "4.2.0"
+  },
+  "devDependencies": {
+    "happy-dom": "20.11.6"
+  }
+}

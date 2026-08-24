@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tools - mbr it services</title>
+<style>
+  :root {
+    --desk: #45524e;
+    --desk-deep: #38443f;
+    --ink: #1d3f8f;
+    --panel: #f4f5f2;
+    --muted: #6b7470;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: linear-gradient(160deg, var(--desk) 0%, var(--desk-deep) 100%);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    color: #23282b;
+    display: flex;
+    flex-direction: column;
+  }
+  main { flex: 1; max-width: 760px; margin: 0 auto; padding: 48px 24px 24px; width: 100%; }
+  h1 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: 600;
+    font-size: 1.7rem;
+    color: #eef1ee;
+    margin: 0 0 6px;
+  }
+  .sub { color: #c6cec9; font-size: 0.9rem; margin: 0 0 32px; }
+  a.tool {
+    display: block;
+    background: var(--panel);
+    border-radius: 10px;
+    padding: 18px 20px;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    margin-bottom: 16px;
+    transition: transform 0.1s ease;
+  }
+  a.tool:hover { transform: translateY(-2px); }
+  a.tool h2 { margin: 0 0 4px; font-size: 1.05rem; color: var(--ink); }
+  a.tool p { margin: 0; font-size: 0.85rem; color: var(--muted); }
+  footer {
+    text-align: center;
+    padding: 24px;
+    font-size: 0.78rem;
+    color: #c6cec9;
+    line-height: 1.6;
+  }
+  footer a { color: #eef1ee; text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<main>
+  <h1>Tools</h1>
+  <p class="sub">Kleine Web-Helfer</p>
+
+  <a class="tool" href="school-forms/">
+    <h2>Schulformulare</h2>
+    <p>Schulformulare ausfüllen, als A4-Vorschau prüfen und drucken oder als PDF speichern.</p>
+  </a>
+</main>
+
+<footer>
+  <p>Ein Angebot von <a href="https://mbr.services">mbr it services</a> · <a href="https://mbr.services/de/privacy/">Datenschutz</a> · <a href="https://mbr.services/de/imprint/">Impressum</a></p>
+</footer>
+
+</body>
+</html>

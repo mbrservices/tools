@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Schulformulare - Ausfüllen &amp; drucken</title>
+<link rel="stylesheet" href="styles.css">
+<!-- The form templates are not listed here: app.js discovers and loads
+     templates/*.js dynamically via templates/manifest.json -->
+<script defer src="vendor/mustache.min.js"></script>
+<script defer src="profiles.js"></script>
+<script defer src="app.js"></script>
+</head>
+<body>
+
+<header class="app">
+  <h1>Schulformulare</h1>
+  <p>Neues Schuljahr, alte Zettel: Daten einmal eintragen - Formulare für alle Kinder in Sekunden ausfüllen und drucken.</p>
+</header>
+
+<div class="profiles-wrap">
+  <details class="panel profiles">
+    <summary>Stammdaten</summary>
+    <p class="hint" style="margin-top:8px;">Schule, Kinder sowie Eltern und Ansprechpartner fließen von hier automatisch in alle Formulare ein.</p>
+    <div id="profilesHost"></div>
+  </details>
+</div>
+
+<div class="tpl-wrap">
+  <div class="panel tpl-panel">
+    <label class="field-label" for="tplSelect">Vorlage</label>
+    <select id="tplSelect"></select>
+    <p class="tpl-desc" id="tplDescription" style="display:none"></p>
+    <!-- notes render as-is; a notes.html wraps itself in <details> where useful -->
+    <div id="tplNotesHost" style="display:none"></div>
+  </div>
+</div>
+
+<div class="layout">
+  <div class="panel">
+    <div id="childRow" style="display:none">
+      <label class="field-label" for="childSelect">Kind</label>
+      <select id="childSelect"></select>
+    </div>
+
+    <div id="fieldsHost"></div>
+    <p class="panel-info" id="panelInfo" style="display:none"></p>
+
+    <div class="actions">
+      <button class="primary" id="printBtn" type="button">Drucken</button>
+      <button class="ghost" id="resetBtn" type="button">Leeren</button>
+    </div>
+    <p class="hint">„Leeren“ setzt nur die Formulareingaben des gewählten Kindes zurück - die Stammdaten bleiben erhalten.</p>
+  </div>
+
+  <div class="sheet-wrap">
+    <div class="sheet" id="sheet"></div>
+  </div>
+</div>
+
+<footer class="app">
+  <p>Alle eingegebenen Daten bleiben lokal in deinem Browser gespeichert.
+    <button class="linklike" id="wipeBtn" type="button">Alle Daten löschen</button></p>
+  <p class="brand">Ein Tool von <a href="https://mbr.services">mbr it services</a> · <a href="https://mbr.services/de/privacy/">Datenschutz</a> · <a href="https://mbr.services/de/imprint/">Impressum</a></p>
+</footer>
+
+</body>
+</html>

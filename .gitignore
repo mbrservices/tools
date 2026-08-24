@@ -1,0 +1,13 @@
+school-forms/examples
+
+# fetched at install time (npm run vendor), not committed
+school-forms/src/vendor/
+
+.DS_Store
+node_modules/
+dist/
+
+# Local-only files and directories (private) stay out of Git
+.vscode/
+*.local*
+

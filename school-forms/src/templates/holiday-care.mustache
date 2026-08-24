@@ -1,0 +1,27 @@
+<p style="display:flex;justify-content:space-between;font-family:system-ui,sans-serif;font-size:10.5pt;">
+  <span><b>Schulnummer:</b> {{{schoolNumber}}}</span>
+  <span><b>Rückgabe bis spätestens:</b> <b>{{{returnByText}}}</b></span>
+</p>
+<p class="form-title">Erfassung Betreuungsbedarf {{holidayPhrase}}</p>
+<p style="display:flex;justify-content:space-between;font-family:system-ui,sans-serif;font-size:10.5pt;">
+  <span><b>Name des Kindes:</b> {{{childFormal}}}</span>
+  <span><b>Klasse:</b> {{{grade}}}</span>
+</p>
+<p style="font-family:system-ui,sans-serif;font-size:10.5pt;">Um eine optimale Betreuung planen zu können, bitten wir Sie, Ihren <b>tatsächlichen</b> Bedarf <b><u>VERBINDLICH</u></b> anzumelden.</p>
+<p style="font-family:system-ui,sans-serif;font-size:10.5pt;"><b>Mein Kind benötigt eine Betreuung im Hort {{holidayPhrase}}</b>&nbsp;&nbsp;&nbsp;
+  {{#needsYes}}☒{{/needsYes}}{{^needsYes}}☐{{/needsYes}} ja&nbsp;&nbsp;&nbsp;
+  {{#needsNo}}☒{{/needsNo}}{{^needsNo}}☐{{/needsNo}} nein</p>
+<table class="doc">
+  <tr><th style="width:26%">Datum</th><th style="width:15%">von</th><th style="width:15%">bis</th><th>Name der Grundschule</th></tr>
+  {{#rows}}
+  <tr{{#weekStart}} class="week-start"{{/weekStart}}><td>{{dateText}}</td><td>{{from}}</td><td>{{to}}</td><td>{{coverage}}</td></tr>
+  {{/rows}}
+</table>
+<p style="font-family:system-ui,sans-serif;font-size:10.5pt;">
+  {{#pickedUp}}☒{{/pickedUp}}{{^pickedUp}}☐{{/pickedUp}} Mein/unser Kind wird abgeholt. &nbsp;&nbsp;
+  {{#aloneHome}}☒{{/aloneHome}}{{^aloneHome}}☐{{/aloneHome}} Mein/unser Kind darf allein nach Hause.
+</p>
+{{#needsYes}}
+<p style="font-family:system-ui,sans-serif;font-size:10.5pt;"><b>Tel. Erreichbarkeit während der Ferien</b> (nur bei Teilnahme angeben):<br>{{{phone}}}</p>
+{{/needsYes}}
+<p style="margin-top:40px;font-family:system-ui,sans-serif;font-size:10pt;"><b>Datum/Unterschrift Sorgeberechtigte:</b>&nbsp; {{dateText}} <span class="fillline" style="min-width:200px;">&nbsp;</span></p>

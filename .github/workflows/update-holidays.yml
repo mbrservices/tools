@@ -1,0 +1,44 @@
+name: Update holiday data
+
+on:
+  schedule:
+    - cron: "10 16 * * 1" # Monday 16:10 UTC, weekly
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write # to trigger the deploy workflow after pushing
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: jdx/mise-action@v2
+      - run: npm run update-holidays --workspace school-forms
+      - name: Commit data changes, or keepalive
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          DATA=school-forms/src/data/holidays.json
+          if ! git diff --quiet -- "$DATA"; then
+            git add "$DATA"
+            git commit -m "chore: update school holiday data"
+            git push
+            gh workflow run deploy.yml --ref "$GITHUB_REF_NAME"
+            exit 0
+          fi
+          # No data change: refresh the timestamp before GitHub's 60-day
+          # inactivity window disables this schedule (~50 days keepalive)
+          AGE_DAYS=$(( ( $(date +%s) - $(git log -1 --format=%ct) ) / 86400 ))
+          echo "no data change, last commit ${AGE_DAYS} days ago"
+          if [ "$AGE_DAYS" -ge 50 ]; then
+            FORCE=1 npm run update-holidays --workspace school-forms
+            git add "$DATA"
+            git commit -m "chore: keepalive - refresh holiday data timestamp"
+            git push
+            # deploy deliberately skipped: only the fetchedAt timestamp
+            # changed, which the app never reads
+          fi

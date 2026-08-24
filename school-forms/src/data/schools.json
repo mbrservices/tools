@@ -1,0 +1,85 @@
+{
+  "_comment": "School directory for the autocomplete when adding a school in the master data. Source: Schuladressen (TMBWK Statistikstelle, Stand 19.08.2026), filtered to Sonneberg; extend freely.",
+  "schools": [
+    {
+      "name": "Bürgerschule Sonneberg Staatliche Regelschule",
+      "street": "Unterer Markt 4",
+      "zip": "96515",
+      "city": "Sonneberg",
+      "number": "25919",
+      "phone": "(0 36 75) 70 28 83"
+    },
+    {
+      "name": "Schulzentrum am Wolkenrasen Staatliche Grundschule Sonneberg",
+      "street": "Friedrich-Ludwig-Jahn-Straße 43",
+      "zip": "96515",
+      "city": "Sonneberg",
+      "number": "17286",
+      "phone": "(0 36 75) 80 09 61"
+    },
+    {
+      "name": "Schulzentrum am Wolkenrasen Staatliches regionales Förderzentrum Sonneberg",
+      "street": "Friedrich-Ludwig-Jahn-Straße 41",
+      "zip": "96515",
+      "city": "Sonneberg",
+      "number": "31540",
+      "phone": "(0 36 75) 70 30 93"
+    },
+    {
+      "name": "Sibylle-Abel-Schule Sonneberg Staatliche Gemeinschaftsschule",
+      "street": "Max-Planck-Straße 51",
+      "zip": "96515",
+      "city": "Sonneberg",
+      "number": "45780",
+      "phone": "(0 36 75) 40 98 30"
+    },
+    {
+      "name": "Staatliche Berufsbildende Schule Sonneberg",
+      "street": "Max-Planck-Straße 49",
+      "zip": "96515",
+      "city": "Sonneberg",
+      "number": "62315",
+      "phone": "(0 36 75) 40 50"
+    },
+    {
+      "name": "Staatliche Grundschule \"Geschwister Scholl\" Sonneberg",
+      "street": "Juttastraße 1",
+      "zip": "96515",
+      "city": "Sonneberg",
+      "number": "17272",
+      "phone": "(0 36 75) 70 23 58"
+    },
+    {
+      "name": "Staatliche Grundschule Sonneberg-Grube",
+      "street": "Eisenbahnstraße 16",
+      "zip": "96515",
+      "city": "Sonneberg",
+      "number": "17287",
+      "phone": "(0 36 75) 70 28 93"
+    },
+    {
+      "name": "Staatliche Grundschule Sonneberg-Oberlind",
+      "street": "Johann-Sebastian-Bach-Straße 9",
+      "zip": "96515",
+      "city": "Sonneberg",
+      "number": "17259",
+      "phone": "(0 36 75) 70 72 22"
+    },
+    {
+      "name": "Staatliche Regelschule \"Cuno Hoffmeister\" Sonneberg",
+      "street": "Neuhäuser Straße 3-5",
+      "zip": "96515",
+      "city": "Sonneberg",
+      "number": "25935",
+      "phone": "(0 36 75) 4 22 69-0"
+    },
+    {
+      "name": "Staatliches Gymnasium \"Hermann Pistor\" Sonneberg",
+      "street": "Dammstraße 50",
+      "zip": "96515",
+      "city": "Sonneberg",
+      "number": "51621",
+      "phone": "(0 36 75) 46 88 90"
+    }
+  ]
+}
