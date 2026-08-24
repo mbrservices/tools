@@ -513,6 +513,23 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.title = t.label + " - " + (d.child || "Schulformular");
   }
 
+  /* The sheet is a fixed A4 box (styles.css) so the preview wraps and fills
+     pages exactly like the print output. Instead of reflowing on narrow
+     screens it is zoomed down to whatever width the column offers - on a
+     phone that yields a small but true-to-print A4 page (pinch to read). */
+  const A4_WIDTH_PX = (210 * 96) / 25.4; // the sheet's CSS width in px
+  function fitSheet() {
+    // the column never grows with the sheet (minmax(0, 1fr)), so measuring
+    // it cannot feed back into the zoom we are about to set
+    const avail = sheet.parentElement.clientWidth;
+    if (!avail) return; // not laid out (yet) - keep the current zoom
+    // -1px: leave the sheet's max-width fallback just out of reach, it
+    // would squeeze the page narrower than A4
+    const zoom = Math.min(1, (avail - 1) / A4_WIDTH_PX);
+    document.documentElement.style.setProperty("--sheet-zoom", zoom.toFixed(4));
+  }
+  window.addEventListener("resize", fitSheet);
+
   // "Leeren" clears only the current child's form inputs, not master data
   function resetForm() {
     store.byChild[store.child] = state = {};
@@ -551,4 +568,5 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   refreshSelectors();
   activateChild(store.child);
+  fitSheet();
 });

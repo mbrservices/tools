@@ -12,6 +12,9 @@
 }
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
+/* keep mobile WebKit from inflating font sizes ("text autosizing") - it would
+   change line wrapping and page fills, on screen and in the print job */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 body {
   background: linear-gradient(160deg, var(--desk) 0%, var(--desk-deep) 100%);
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
@@ -246,6 +249,14 @@ button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
   line-height: 1.55;
   color: #1a1d1f;
 }
+/* The sheet keeps its A4 geometry on every screen size - it is scaled down
+   to the available width instead of reflowing, so the preview wraps and
+   fills pages exactly like the print output (fitSheet() in app.js sets the
+   factor). zoom, not transform: the layout around it takes the scaled size.
+   The max-width above stays as the fallback for engines without zoom. */
+@media screen {
+  .sheet { zoom: var(--sheet-zoom, 1); }
+}
 .sheet h2.doc-title {
   font-size: 15.5pt;
   font-weight: 600;
@@ -408,32 +419,52 @@ footer.app button.linklike {
 footer.app button.linklike:hover { color: #fff; }
 
 /* ---------- Responsive ---------- */
-@media (max-width: 980px) {
-  .layout { grid-template-columns: 1fr; }
+/* screen only: the print viewport is narrow too (A4 minus margins ~ 680px),
+   so an unqualified max-width query would leak these rules into the print job */
+@media screen and (max-width: 980px) {
+  /* minmax(0, 1fr): the A4 sheet must not widen the column - it is zoomed
+     down to fit it instead (see --sheet-zoom above) */
+  .layout { grid-template-columns: minmax(0, 1fr); }
   .profile-grid { grid-template-columns: 1fr; }
-  .sheet { width: 100%; min-height: auto; padding: 10mm 8mm; }
-  .sheet .page { min-height: auto; }
-  .sheet .page-break { margin-left: -8mm; margin-right: -8mm; }
+  .sheet-wrap { margin: 0 -12px; } /* narrow screens: more room for the sheet */
 }
 
 /* ---------- Print: sheet only ---------- */
 @media print {
-  /* min-height: 100vh would force a blank second page */
-  html, body { background: #fff; min-height: 0; height: auto; }
+  /* min-height: 100vh would force a blank second page.
+     width: phones lay the print job out at the device viewport width (~390px)
+     and scale that rendering onto the paper - which blew the sheet up by ~1.7x,
+     so page one alone overflowed onto a second sheet (and the content past the
+     pre-scale page count was cut off). Pinning the document to the printable
+     A4 width (210mm paper - 2x15mm @page margin) makes that scale factor 1,
+     so a phone paginates exactly like a desktop. */
+  html, body { background: #fff; min-height: 0; height: auto; width: 180mm; }
   header.app, footer.app, .panel, .profiles-wrap, .tpl-wrap { display: none !important; }
   .layout { display: block; margin: 0; padding: 0; max-width: none; }
   .sheet {
     box-shadow: none;
-    width: auto;
+    width: 180mm;
+    max-width: none;
     min-height: auto;
     padding: 0;
     margin: 0;
   }
   .sheet .page { min-height: 0; }
-  .sheet .page-break { height: 0; margin: 0; background: none; box-shadow: none; break-before: page; }
+  /* the forced break rides on the following page box instead of the empty,
+     zero-height separator - a break on a box with no content is honoured
+     inconsistently. page-break-before is the legacy alias for engines that
+     do not implement break-before for pages. */
+  .sheet .page-break { display: none; }
+  .sheet .page-break + .page, .sheet .page + .page {
+    break-before: page;
+    page-break-before: always;
+  }
   .sheet .ghost { display: none; }
   .sheet .print-only { display: inline; }
   /* same geometry as the on-screen preview (its 15mm padding), so line
-     wraps and page fills match what was checked on screen */
+     wraps and page fills match what was checked on screen. NB: a zero
+     margin does NOT stop Safari from printing its own header and footer
+     (title, date, URL, page number) - it just moves them onto the sheet.
+     No CSS suppresses those; only printing an actual PDF file does. */
   @page { size: A4; margin: 15mm; }
 }
