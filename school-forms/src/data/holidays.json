@@ -1,14 +1,8 @@
 {
-  "fetchedAt": "2026-08-21T20:38:26.884Z",
+  "fetchedAt": "2026-09-07T19:53:30.957Z",
   "source": "openholidaysapi.org",
   "subdivision": "DE-TH",
   "holidays": [
-    {
-      "id": "5fec2836-3d12-4a43-987e-1ed22ce986a5",
-      "name": "Sommerferien",
-      "startDate": "2026-07-04",
-      "endDate": "2026-08-14"
-    },
     {
       "id": "dd933683-1b2b-49e6-9933-4b565cef0d37",
       "name": "Herbstferien",
@@ -56,6 +50,12 @@
       "name": "Weihnachtsferien",
       "startDate": "2027-12-23",
       "endDate": "2027-12-31"
+    },
+    {
+      "id": "25eb1cde-3621-4098-a38a-18a7f6074a37",
+      "name": "Winterferien",
+      "startDate": "2028-02-07",
+      "endDate": "2028-02-12"
     }
   ]
 }
